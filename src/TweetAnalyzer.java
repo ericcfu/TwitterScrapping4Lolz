@@ -8,24 +8,6 @@ import static javafx.scene.input.KeyCode.T;
 
 public class TweetAnalyzer {
 
-    public class Node {
-        private String msg;
-        private int priority;
-
-        public Node(String m, int p) {
-            msg = m;
-            priority = p;
-        }
-
-        private void changePriority(int p) {
-            priority = p;
-        }
-
-        private int getPriority() {
-            return priority;
-        }
-    }
-
     public static void main(String[] args) {
         read("MAC");
     }
@@ -36,7 +18,6 @@ public class TweetAnalyzer {
 
     private static void read(String os) {
 
-        //Process p = Runtime.getRuntime().exec("python mdfdsjf.py");
         List<String> tweets = TweetFetchInterface.getTweets("JerryBearySong", 10, os);
         Comparator<String> c1 = new Comparator<>() {
             @Override
@@ -65,17 +46,19 @@ public class TweetAnalyzer {
                 Scanner sc = new Scanner(tweets.get(i));
                 while (sc.hasNext()) {
                     String word = sc.next();
-                    System.out.println("Adding string: " + word);
-                    if (!lengthMap.containsKey(word.length())) {
-                        lengthMap.put(word.length(), 1);
-                    } else {
-                        lengthMap.put(word.length(), lengthMap.remove(word.length()) + 1);
-                    }
-                    if (!wordSet.contains(word)) {
-                        wordMap.put(word, 1);
-                        wordSet.add(word);
-                    } else {
-                        wordMap.put(word, wordMap.remove(word) + 1);
+                    if (!word.contains("http")) {
+                        System.out.println("Adding string: " + word);
+                        if (!lengthMap.containsKey(word.length())) {
+                            lengthMap.put(word.length(), 1);
+                        } else {
+                            lengthMap.put(word.length(), lengthMap.remove(word.length()) + 1);
+                        }
+                        if (!wordSet.contains(word)) {
+                            wordMap.put(word, 1);
+                            wordSet.add(word);
+                        } else {
+                            wordMap.put(word, wordMap.remove(word) + 1);
+                        }
                     }
                 }
             }
@@ -84,6 +67,9 @@ public class TweetAnalyzer {
             System.out.println("Exception Found:" + e);
         }
 
+//        for (int i = 0; i < wordMap.size(); i += 1) {
+//
+//        }
         System.out.println("wordMap: " + wordMap);
         System.out.println("lengthMap: " + lengthMap);
     }
