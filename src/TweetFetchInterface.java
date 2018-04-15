@@ -4,6 +4,10 @@ import java.util.List;
 
 /**
  * @source https://alvinalexander.com/java/edu/pj/pj010016
+ * used source's inspiration and method of running python programs
+ * within a java program as a terminal and input.
+ * modified to fit the data return format and input format
+ * for the project
  */
 public class TweetFetchInterface {
     public static List<String> getTweets(String twitterHandle, int num, String os) {
