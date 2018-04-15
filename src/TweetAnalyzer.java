@@ -13,7 +13,7 @@ public class TweetAnalyzer {
 
     private static void read(String os) {
 
-        List<String> tweets = TweetFetchInterface.getTweets("BarackObama", 10, os);
+        List<String> tweets = TweetFetchInterface.getTweets("BarackObama", 100, os);
         Comparator<String> c1 = new Comparator<>() {
             @Override
             public int compare(String o1, String o2) {
@@ -40,7 +40,6 @@ public class TweetAnalyzer {
             while (sc.hasNext()) {
                 String word = sc.next();
                 if (!word.contains("http")) {
-                    System.out.println("Adding string: " + word);
                     if (!lengthMap.containsKey(word.length())) {
                         lengthMap.put(word.length(), 1);
                     } else {
