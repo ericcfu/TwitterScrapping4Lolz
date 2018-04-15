@@ -16,7 +16,7 @@ public class TweetFetchInterface {
         try {
             // using the Runtime exec method:
             Process p;
-            if (os.equals("MAC")) {
+            if (os.equals("MAC") || os.equals("LINUX")) {
                 p = Runtime.getRuntime().exec("python3 tweet_fetcher.py " + twitterHandle + " " + numTweets);
             } else {
                 p = Runtime.getRuntime().exec("py tweet_fetcher.py " + twitterHandle + " " + numTweets);
