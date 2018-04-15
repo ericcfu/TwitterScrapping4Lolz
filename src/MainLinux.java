@@ -3,7 +3,6 @@
  */
 public class MainLinux {
     public static void main(String[] args) {
-        TweetAnalyzer a = new TweetAnalyzer();
-        a.main("LINUX");
+        TweetAnalyzer a = new TweetAnalyzer("JerryBearySong", 200, "LINUX");
     }
 }
