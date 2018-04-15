@@ -19,7 +19,7 @@ public class TweetFetchInterface {
             }
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
             // read the output from the command
-            System.out.println("Here is the standard output of the command:\n");
+            //System.out.println("Here is the standard output of the command:\n");
             while ((s = stdInput.readLine()) != null) {
                 System.out.println(s);
                 list.add(s);
