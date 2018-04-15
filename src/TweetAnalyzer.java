@@ -60,20 +60,23 @@ public class TweetAnalyzer {
         TreeSet<String> wordSet = new TreeSet<>();
 
         try {
-            Scanner sc = new Scanner(os);
-            while (sc.hasNext()) {
-                String word = sc.next();
-                System.out.println("Adding string: " + word);
-                if (!lengthMap.containsKey(word.length())) {
-                    lengthMap.put(word.length(), 1);
-                } else {
-                    lengthMap.put(word.length(), lengthMap.remove(word.length()) + 1);
-                }
-                if (!wordSet.contains(word)) {
-                    wordMap.put(word, 1);
-                    wordSet.add(word);
-                } else {
-                    wordMap.put(word, wordMap.remove(word) + 1);
+            System.out.println(tweets);
+            for (int i = 0; i < tweets.size(); i += 1) {
+                Scanner sc = new Scanner(tweets.get(i));
+                while (sc.hasNext()) {
+                    String word = sc.next();
+                    System.out.println("Adding string: " + word);
+                    if (!lengthMap.containsKey(word.length())) {
+                        lengthMap.put(word.length(), 1);
+                    } else {
+                        lengthMap.put(word.length(), lengthMap.remove(word.length()) + 1);
+                    }
+                    if (!wordSet.contains(word)) {
+                        wordMap.put(word, 1);
+                        wordSet.add(word);
+                    } else {
+                        wordMap.put(word, wordMap.remove(word) + 1);
+                    }
                 }
             }
 
