@@ -33,34 +33,44 @@ public class TweetAnalyzer {
     private static void read() {
 
         //Process p = Runtime.getRuntime().exec("python mdfdsjf.py");
-        List<String> tweets = TweetFetchInterface.getTweets("JerryBearySong");
+//        List<String> tweets = TweetFetchInterface.getTweets("JerryBearySong");
         File nathan = new File("losebags.txt");
         Comparator<String> c1 = new Comparator<>() {
             @Override
             public int compare(String o1, String o2) {
+                if (o2.length() == o1.length()) {
+                    return o1.compareTo(o2);
+                }
                 return o2.length() - o1.length();
             }
         };
 
-        TreeMap<String, Integer> eric = new TreeMap<>(c1);
-        TreeMap<Integer, Integer> sahai = new TreeMap<>();
-        TreeSet<String> emma = new TreeSet<>();
+        Comparator<Integer> c2 = new Comparator<>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2 - o1;
+            }
+        };
+
+        TreeMap<String, Integer> wordMap = new TreeMap<>(c1);
+        TreeMap<Integer, Integer> lengthMap = new TreeMap<>(c2);
+        TreeSet<String> wordSet = new TreeSet<>();
 
         try {
             Scanner jerry = new Scanner(nathan);
             while (jerry.hasNext()) {
-                String coke = jerry.next();
-                System.out.println("Adding string: " + coke);
-                if (!sahai.containsKey(coke.length())) {
-                    sahai.put(coke.length(), 1);
+                String word = jerry.next();
+                System.out.println("Adding string: " + word);
+                if (!lengthMap.containsKey(word.length())) {
+                    lengthMap.put(word.length(), 1);
                 } else {
-                    sahai.put(coke.length(), sahai.remove(coke.length()) + 1);
+                    lengthMap.put(word.length(), lengthMap.remove(word.length()) + 1);
                 }
-                if (!emma.contains(coke)) {
-                    eric.put(coke, 1);
-                    emma.add(coke);
+                if (!wordSet.contains(word)) {
+                    wordMap.put(word, 1);
+                    wordSet.add(word);
                 } else {
-                    eric.put(coke, eric.remove(coke) + 1);
+                    wordMap.put(word, wordMap.remove(word) + 1);
                 }
             }
 
@@ -68,7 +78,7 @@ public class TweetAnalyzer {
             System.out.println("File not found! LOSEBAG");
         }
 
-        System.out.println("eric: " + eric);
-        System.out.println("sahai: " + sahai);
+        System.out.println("eric: " + wordMap);
+        System.out.println("sahai: " + lengthMap);
     }
 }
