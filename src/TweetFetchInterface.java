@@ -10,16 +10,16 @@ import java.util.List;
  * for the project
  */
 public class TweetFetchInterface {
-    public static List<String> getTweets(String twitterHandle, int num, String os) {
+    public static List<String> getTweets(String twitterHandle, int numTweets, String os) {
         String s = null;
         ArrayList<String> list = new ArrayList<>();
         try {
             // using the Runtime exec method:
             Process p;
             if (os.equals("MAC")) {
-                p = Runtime.getRuntime().exec("python3 tweet_fetcher.py " + twitterHandle + " " + num);
+                p = Runtime.getRuntime().exec("python3 tweet_fetcher.py " + twitterHandle + " " + numTweets);
             } else {
-                p = Runtime.getRuntime().exec("py tweet_fetcher.py " + twitterHandle + " " + num);
+                p = Runtime.getRuntime().exec("py tweet_fetcher.py " + twitterHandle + " " + numTweets);
             }
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
             // read the output from the command
