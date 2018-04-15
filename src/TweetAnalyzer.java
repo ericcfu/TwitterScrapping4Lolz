@@ -1,5 +1,11 @@
 
-import java.util.*;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
 
 public class TweetAnalyzer {
 
@@ -12,6 +18,7 @@ public class TweetAnalyzer {
     TreeSet<String> linkSet = new TreeSet<>();
     TreeSet<String> mentionSet = new TreeSet<>();
     TreeSet<String> tagSet =new TreeSet<>();
+
 
     Comparator<String> c1 = new Comparator<>() {
         @Override
