@@ -6,7 +6,7 @@ import java.util.List;
  * @source https://alvinalexander.com/java/edu/pj/pj010016
  */
 public class TweetFetchInterface {
-public static List<String> getTweets(String twitterHandle) {
+    public static List<String> getTweets(String twitterHandle) {
         String s = null;
         ArrayList<String> list = new ArrayList<>();
         try {
