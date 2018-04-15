@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b508bfc-0b24-47c7-b2d5-fe3f84ef242c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tweets/MainLinux.class" afterPath="$PROJECT_DIR$/out/production/Tweets/MainLinux.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tweets/TweetFetchInterface.class" afterPath="$PROJECT_DIR$/out/production/Tweets/TweetFetchInterface.class" />
       <change beforePath="$PROJECT_DIR$/src/TweetAnalyzer.java" afterPath="$PROJECT_DIR$/src/TweetAnalyzer.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -20,8 +17,8 @@
       <file leaf-file-name="TweetAnalyzer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/TweetAnalyzer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="68" column="24" lean-forward="false" selection-start-line="68" selection-start-column="24" selection-end-line="68" selection-end-column="24" />
+            <state relative-caret-position="-681">
+              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -312,8 +309,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TweetAnalyzer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="68" column="24" lean-forward="false" selection-start-line="68" selection-start-column="24" selection-end-line="68" selection-end-column="24" />
+        <state relative-caret-position="-681">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>

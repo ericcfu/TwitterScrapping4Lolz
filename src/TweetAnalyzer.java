@@ -5,6 +5,8 @@ public class TweetAnalyzer {
 
     TreeMap<String, Integer> wordMap;
     TreeMap<Integer, Integer> lengthMap;
+    TreeSet<String> wordSet = new TreeSet<>();
+
 
     public TweetAnalyzer() {
         Comparator<String> c1 = new Comparator<>() {
@@ -42,24 +44,11 @@ public class TweetAnalyzer {
 
         List<String> tweets = TweetFetchInterface.getTweets("BarackObama", 100, os);
 
-        TreeSet<String> wordSet = new TreeSet<>();
-
         for (int i = 0; i < tweets.size(); i += 1) {
             Scanner sc = new Scanner(tweets.get(i));
             while (sc.hasNext()) {
                 String word = sc.next();
-                if (!analyzer.lengthMap.containsKey(word.length())) {
-                    analyzer.lengthMap.put(word.length(), 1);
-                } else {
-                    analyzer.lengthMap.put(word.length(), analyzer.lengthMap.remove(word.length()) + 1);
-                }
-                if (!wordSet.contains(word)) {
-                    analyzer.wordMap.put(word, 1);
-                    wordSet.add(word);
-                } else {
-                    analyzer.wordMap.put(word, analyzer.wordMap.remove(word) + 1);
-                }
-
+                analyzer.readWord(word, analyzer);
             }
         }
 
@@ -67,6 +56,20 @@ public class TweetAnalyzer {
         System.out.println("lengthMap: " + analyzer.lengthMap);
 
         return analyzer.wordMap;
+    }
+
+    private void readWord(String word, TweetAnalyzer analyzer) {
+        if (!analyzer.lengthMap.containsKey(word.length())) {
+            analyzer.lengthMap.put(word.length(), 1);
+        } else {
+            analyzer.lengthMap.put(word.length(), analyzer.lengthMap.remove(word.length()) + 1);
+        }
+        if (!analyzer.wordSet.contains(word)) {
+            analyzer.wordMap.put(word, 1);
+            analyzer.wordSet.add(word);
+        } else {
+            analyzer.wordMap.put(word, analyzer.wordMap.remove(word) + 1);
+        }
     }
 
 }
