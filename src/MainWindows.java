@@ -11,6 +11,7 @@ public class MainWindows {
 
         try {
             TweetAnalyzer a = new TweetAnalyzer(handle, num_tweets, "LINUX");
+
             System.out.print(a.getWordMap());
         } catch(Exception e) {
             System.out.println(e);
