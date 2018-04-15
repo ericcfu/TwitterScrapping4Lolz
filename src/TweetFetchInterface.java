@@ -10,15 +10,14 @@ public class TweetFetchInterface {
         String s = null;
         ArrayList<String> list = new ArrayList<>();
         try {
-            int num = 100;
             // using the Runtime exec method:
+            Process p;
             if (os.equals("MAC")) {
-                Process p = Runtime.getRuntime().exec("python3 tweet_fetcher.py " + twitterHandle + " " + num);
+                p = Runtime.getRuntime().exec("python3 tweet_fetcher.py " + twitterHandle + " " + num);
             } else {
-                Process p = Runtime.getRuntime().exec("py tweet_fetcher.py " + twitterHandle + " " + num);
+                p = Runtime.getRuntime().exec("py tweet_fetcher.py " + twitterHandle + " " + num);
             }
-            BufferedReader stdInput = new BufferedReader(new 
-                 InputStreamReader(p.getInputStream()));
+            BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
             // read the output from the command
             System.out.println("Here is the standard output of the command:\n");
             while ((s = stdInput.readLine()) != null) {
