@@ -17,7 +17,7 @@ try:
 except:
     None
     
-status_list = api.GetUserTimeline(screen_name=twitter_handle, count=num_tweets)
+status_list = api.GetUserTimeline(screen_name=twitter_handle, count=num_tweets, include_rts=False)
 tweets = [i.AsDict() for i in status_list]
 print_errors = 0
 
