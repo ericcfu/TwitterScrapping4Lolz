@@ -10,7 +10,7 @@ public class MainWindows {
         int num_tweets = Integer.parseInt(str_num_tweets);
 
         try {
-            TweetAnalyzer a = new TweetAnalyzer(handle, num_tweets, "LINUX");
+            TweetAnalyzer a = new TweetAnalyzer(handle, num_tweets, "WINDOWS");
 
             System.out.print(a.getWordMap());
         } catch(Exception e) {
