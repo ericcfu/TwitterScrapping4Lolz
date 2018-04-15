@@ -6,13 +6,17 @@ import java.util.List;
  * @source https://alvinalexander.com/java/edu/pj/pj010016
  */
 public class TweetFetchInterface {
-    public static List<String> getTweets(String twitterHandle) {
+    public static List<String> getTweets(String twitterHandle, int num, String os) {
         String s = null;
         ArrayList<String> list = new ArrayList<>();
         try {
-            int num = 10;
+            int num = 100;
             // using the Runtime exec method:
-            Process p = Runtime.getRuntime().exec("py tweet_fetcher.py " + twitterHandle + " " + num);
+            if (os.equals("MAC")) {
+                Process p = Runtime.getRuntime().exec("python3 tweet_fetcher.py " + twitterHandle + " " + num);
+            } else {
+                Process p = Runtime.getRuntime().exec("py tweet_fetcher.py " + twitterHandle + " " + num);
+            }
             BufferedReader stdInput = new BufferedReader(new 
                  InputStreamReader(p.getInputStream()));
             // read the output from the command
