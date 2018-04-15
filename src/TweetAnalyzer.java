@@ -9,26 +9,29 @@ public class TweetAnalyzer {
     TreeMap<String, Integer> mentionMap;
     TreeMap<String, Integer> tagMap;
     TreeSet<String> wordSet = new TreeSet<>();
+    TreeSet<String> linkSet = new TreeSet<>();
+    TreeSet<String> mentionSet = new TreeSet<>();
+    TreeSet<String> tagSet =new TreeSet<>();
+
+    Comparator<String> c1 = new Comparator<>() {
+        @Override
+        public int compare(String o1, String o2) {
+            if (o2.length() == o1.length()) {
+                return o1.compareTo(o2);
+            }
+            return o2.length() - o1.length();
+        }
+    };
+
+    Comparator<Integer> c2 = new Comparator<>() {
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            return o2 - o1;
+        }
+    };
 
 
     public TweetAnalyzer(String handle, int numTweets, String os) {
-        Comparator<String> c1 = new Comparator<>() {
-            @Override
-            public int compare(String o1, String o2) {
-                if (o2.length() == o1.length()) {
-                    return o1.compareTo(o2);
-                }
-                return o2.length() - o1.length();
-            }
-        };
-
-        Comparator<Integer> c2 = new Comparator<>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o2 - o1;
-            }
-        };
-
         wordMap = new TreeMap<>(c1);
         lengthMap = new TreeMap<>(c2);
         linkMap = new TreeMap<>();
@@ -42,14 +45,62 @@ public class TweetAnalyzer {
             while (sc.hasNext()) {
                 String word = sc.next();
                 if (word.contains("http")) {
-
+                    readLink(word);
+                } else if (word.contains("#")) {
+                    readTag(word);
+                } else if (word.contains("@")) {
+                    readMention(word);
                 } else {
                     readWord(word);
                 }
             }
         }
+    }
 
-        System.out.println("wordMap: " + wordMap);
+    private void readLink(String word) {
+        if (!linkSet.contains(word)) {
+            linkMap.put(word, 1);
+            linkSet.add(word);
+        } else {
+            linkMap.put(word, linkMap.remove(word) + 1);
+        }
+    }
+
+    private void readTag(String word) {
+        if (!tagSet.contains(word)) {
+            tagMap.put(word, 1);
+            tagSet.add(word);
+        } else {
+            tagMap.put(word, tagMap.remove(word) + 1);
+        }
+    }
+
+    private void readMention(String word) {
+        if (!mentionSet.contains(word)) {
+            mentionMap.put(word, 1);
+            mentionSet.add(word);
+        } else {
+            mentionMap.put(word, mentionMap.remove(word) + 1);
+        }
+    }
+
+    private void readWord(String word) {
+        word = cleanWord(word);
+        if (!lengthMap.containsKey(word.length())) {
+            lengthMap.put(word.length(), 1);
+        } else {
+            lengthMap.put(word.length(), lengthMap.remove(word.length()) + 1);
+        }
+        if (!wordSet.contains(word)) {
+            wordMap.put(word, 1);
+            wordSet.add(word);
+        } else {
+            wordMap.put(word, wordMap.remove(word) + 1);
+        }
+    }
+
+    private String cleanWord(String word) {
+        return word.replaceAll("\\p{P}", "");
     }
 
     public TreeMap<String, Integer> getWordMap() {
@@ -79,24 +130,4 @@ public class TweetAnalyzer {
     public static void main(String[] args) {
 
     }
-
-    private void readWord(String word) {
-        word = cleanWord(word);
-        if (!lengthMap.containsKey(word.length())) {
-            lengthMap.put(word.length(), 1);
-        } else {
-            lengthMap.put(word.length(), lengthMap.remove(word.length()) + 1);
-        }
-        if (!wordSet.contains(word)) {
-            wordMap.put(word, 1);
-            wordSet.add(word);
-        } else {
-            wordMap.put(word, wordMap.remove(word) + 1);
-        }
-    }
-
-    private String cleanWord(String word) {
-        return word.replaceAll("\\p{P}", "");
-    }
-
 }
