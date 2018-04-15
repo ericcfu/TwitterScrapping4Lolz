@@ -25,7 +25,7 @@ public class TweetFetchInterface {
             // read the output from the command
             //System.out.println("Here is the standard output of the command:\n");
             while ((s = stdInput.readLine()) != null) {
-                System.out.println(s);
+                //System.out.println(s);
                 list.add(s);
             }
         }
