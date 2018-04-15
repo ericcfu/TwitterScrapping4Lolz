@@ -1,10 +1,5 @@
-import jdk.nashorn.api.tree.Tree;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.*;
-
-import static javafx.scene.input.KeyCode.T;
 
 public class TweetAnalyzer {
 
@@ -18,7 +13,7 @@ public class TweetAnalyzer {
 
     private static void read(String os) {
 
-        List<String> tweets = TweetFetchInterface.getTweets("JerryBearySong", 10, os);
+        List<String> tweets = TweetFetchInterface.getTweets("BarackObama", 10, os);
         Comparator<String> c1 = new Comparator<>() {
             @Override
             public int compare(String o1, String o2) {
@@ -40,32 +35,28 @@ public class TweetAnalyzer {
         TreeMap<Integer, Integer> lengthMap = new TreeMap<>(c2);
         TreeSet<String> wordSet = new TreeSet<>();
 
-        try {
-            System.out.println(tweets);
-            for (int i = 0; i < tweets.size(); i += 1) {
-                Scanner sc = new Scanner(tweets.get(i));
-                while (sc.hasNext()) {
-                    String word = sc.next();
-                    if (!word.contains("http")) {
-                        System.out.println("Adding string: " + word);
-                        if (!lengthMap.containsKey(word.length())) {
-                            lengthMap.put(word.length(), 1);
-                        } else {
-                            lengthMap.put(word.length(), lengthMap.remove(word.length()) + 1);
-                        }
-                        if (!wordSet.contains(word)) {
-                            wordMap.put(word, 1);
-                            wordSet.add(word);
-                        } else {
-                            wordMap.put(word, wordMap.remove(word) + 1);
-                        }
+        for (int i = 0; i < tweets.size(); i += 1) {
+            Scanner sc = new Scanner(tweets.get(i));
+            while (sc.hasNext()) {
+                String word = sc.next();
+                if (!word.contains("http")) {
+                    System.out.println("Adding string: " + word);
+                    if (!lengthMap.containsKey(word.length())) {
+                        lengthMap.put(word.length(), 1);
+                    } else {
+                        lengthMap.put(word.length(), lengthMap.remove(word.length()) + 1);
+                    }
+                    if (!wordSet.contains(word)) {
+                        wordMap.put(word, 1);
+                        wordSet.add(word);
+                    } else {
+                        wordMap.put(word, wordMap.remove(word) + 1);
                     }
                 }
             }
-
-        } catch (Exception e) {
-            System.out.println("Exception Found:" + e);
         }
+
+
 
 //        for (int i = 0; i < wordMap.size(); i += 1) {
 //
