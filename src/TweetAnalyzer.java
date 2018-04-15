@@ -11,7 +11,7 @@ public class TweetAnalyzer {
     TreeSet<String> wordSet = new TreeSet<>();
 
 
-    public TweetAnalyzer() {
+    public TweetAnalyzer(String handle, int numTweets, String os) {
         Comparator<String> c1 = new Comparator<>() {
             @Override
             public int compare(String o1, String o2) {
@@ -35,7 +35,21 @@ public class TweetAnalyzer {
         mentionMap = new TreeMap<>();
         tagMap = new TreeMap<>();
 
-        read("MAC");
+        List<String> tweets = TweetFetchInterface.getTweets(handle, numTweets, os);
+
+        for (int i = 0; i < tweets.size(); i += 1) {
+            Scanner sc = new Scanner(tweets.get(i));
+            while (sc.hasNext()) {
+                String word = sc.next();
+                if (word.contains("http")) {
+
+                } else {
+                    readWord(word);
+                }
+            }
+        }
+
+        System.out.println("wordMap: " + wordMap);
     }
 
     public TreeMap<String, Integer> getWordMap() {
@@ -66,46 +80,18 @@ public class TweetAnalyzer {
 
     }
 
-    public static void main(String os) {
-        read(os);
-    }
-
-    private static TreeMap<String, Integer> read(String os) {
-
-        TweetAnalyzer analyzer = new TweetAnalyzer();
-
-        List<String> tweets = TweetFetchInterface.getTweets("BarackObama", 200, os);
-
-        for (int i = 0; i < tweets.size(); i += 1) {
-            Scanner sc = new Scanner(tweets.get(i));
-            while (sc.hasNext()) {
-                String word = sc.next();
-                if (word.contains("http")) {
-
-                } else {
-                    analyzer.readWord(word, analyzer);
-                }
-            }
-        }
-
-        System.out.println("wordMap: " + analyzer.wordMap);
-        System.out.println("lengthMap: " + analyzer.lengthMap);
-
-        return analyzer.wordMap;
-    }
-
-    private void readWord(String word, TweetAnalyzer analyzer) {
+    private void readWord(String word) {
         word = cleanWord(word);
-        if (!analyzer.lengthMap.containsKey(word.length())) {
-            analyzer.lengthMap.put(word.length(), 1);
+        if (!lengthMap.containsKey(word.length())) {
+            lengthMap.put(word.length(), 1);
         } else {
-            analyzer.lengthMap.put(word.length(), analyzer.lengthMap.remove(word.length()) + 1);
+            lengthMap.put(word.length(), lengthMap.remove(word.length()) + 1);
         }
-        if (!analyzer.wordSet.contains(word)) {
-            analyzer.wordMap.put(word, 1);
-            analyzer.wordSet.add(word);
+        if (!wordSet.contains(word)) {
+            wordMap.put(word, 1);
+            wordSet.add(word);
         } else {
-            analyzer.wordMap.put(word, analyzer.wordMap.remove(word) + 1);
+            wordMap.put(word, wordMap.remove(word) + 1);
         }
     }
 
