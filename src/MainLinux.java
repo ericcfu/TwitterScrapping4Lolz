@@ -11,7 +11,7 @@ public class MainLinux {
 
         try {
             TweetAnalyzer a = new TweetAnalyzer(handle, num_tweets, "LINUX");
-            System.out.print(a.getWordMap());
+            JOptionPane.showMessageDialog(null, handle + "'s longest word is: " + a.getWordMap().firstEntry().getKey());
         } catch (Exception e) {
             System.out.println(e);
 
